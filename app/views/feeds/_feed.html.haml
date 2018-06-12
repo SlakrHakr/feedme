@@ -1,0 +1,13 @@
+%li.resource
+  - if parse_for_image_source(feed).present?
+    = image_tag(parse_for_image_source(feed), width: '100px')
+    %br
+  %a{ href: parse_for_url(feed) }= parse_for_name(feed)
+  %br
+  = "#{feed.entries.count} articles"
+  %br
+  = "#{feed.entries.select{ |article| parse_for_image_source(article).present? }.count} articles that contain an image"
+  %br
+  = "#{earliest_published_article(feed.entries)} is the earliest article"
+  %br
+  = "#{latest_published_article(feed.entries)} is the latest article"

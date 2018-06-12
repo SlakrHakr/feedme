@@ -1,0 +1,15 @@
+// Place all the styles related to the Feeds controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+ul {
+  padding-left: 0px;
+}
+
+li.resource {
+  list-style: none;
+  border-top: 1px solid gray;
+  border-bottom: 1px solid gray;
+  padding: 30px;
+  margin-bottom: 10px;
+}

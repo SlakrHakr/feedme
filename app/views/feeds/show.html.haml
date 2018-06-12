@@ -1,0 +1,3 @@
+%h1= "Articles for #{parse_for_name(@feed)}"
+%ul#articles
+  = render partial: "article", collection: @articles
