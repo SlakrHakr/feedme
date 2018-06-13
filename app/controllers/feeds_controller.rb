@@ -17,7 +17,9 @@ class FeedsController < ApplicationController
     content = Feedjira.parse(xml)
 
     @feed = join_feed_content(feed, content)
-    @feed[:articles] = sort_articles(@feed[:articles], sort_by) if sort_by.present?
+
+    sort_by = sort_by.present? ? sort_by : { published_date: 'desc' }
+    @feed[:articles] = sort_articles(@feed[:articles], sort_by)
   end
 
   def new
@@ -66,7 +68,7 @@ class FeedsController < ApplicationController
         sorted_articles
       elsif sort_by[:published_date].present?
         sorted_articles = articles.sort_by{ |article| article[:published_date] }
-        sorted_articles.reverse! if sort_by[:published_date] == 'asc'
+        sorted_articles.reverse! if sort_by[:published_date] == 'desc'
         sorted_articles
       else
         articles
