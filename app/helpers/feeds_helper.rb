@@ -1,9 +1,9 @@
 module FeedsHelper
-  # Determine and return primary name for resource.
+  # Determine and return title for resource.
   #
-  # @param resource [Feed/Article] Feed or article to extract name from
-  # @return [String] Name identifier of resource
-  def parse_for_name(resource)
+  # @param resource [Feed/Article] Feed or article to extract title from
+  # @return [String] Title of resource
+  def parse_for_title(resource)
     return resource.title if resource.title.present?
   end
 

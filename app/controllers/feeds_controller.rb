@@ -1,8 +1,11 @@
 class FeedsController < ApplicationController
   def index
-    @feeds = Feed.where(user: current_user).map { |feed|
+    feeds = Feed.where(user: current_user)
+    @feeds = feeds.map { |feed|
       xml = HTTParty.get(feed.url).body
-      Feedjira.parse(xml)
+      content = Feedjira.parse(xml)
+
+      join_feed_content(feed, content)
     }
   end
 
@@ -11,9 +14,9 @@ class FeedsController < ApplicationController
 
     feed = Feed.find(params[:id].to_i)
     xml = HTTParty.get(feed.url).body
-    @feed = Feedjira.parse(xml)
+    content = Feedjira.parse(xml)
 
-    @articles = @feed.entries
+    @feed = join_feed_content(feed, content)
   end
 
   def new
@@ -28,4 +31,26 @@ class FeedsController < ApplicationController
       raise "Failed to add feed: #{params[:feed][:url]}"
     end
   end
+
+  private
+    def join_feed_content(feed, content)
+      feed = JSON.parse(feed.to_json)
+      feed[:title] = helpers.parse_for_title(content)
+      feed[:image] = {}
+      feed[:image][:url] = helpers.parse_for_image_source(content)
+
+      feed[:articles] = content.entries.map { |entry|
+        article = {}
+        article[:title] = helpers.parse_for_title(entry)
+        article[:url] = helpers.parse_for_url(entry)
+        article[:image] = {}
+        article[:image][:url] = helpers.parse_for_image_source(entry)
+        article[:published_date] = helpers.parse_for_published_date(entry)
+        article[:description] = helpers.parse_for_description(entry)
+
+        article
+      }
+
+      feed.deep_symbolize_keys
+    end
 end

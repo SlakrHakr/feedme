@@ -1,13 +1,13 @@
 %li.resource
-  - if parse_for_image_source(feed).present?
-    = image_tag(parse_for_image_source(feed), width: '100px')
+  - if feed[:image].present? && feed[:image][:url].present?
+    = image_tag(feed[:image][:url], width: '100px')
     %br
-  %a{ href: parse_for_url(feed) }= parse_for_name(feed)
+  %a{ href: feed_path(feed[:id]) }= feed[:title]
   %br
-  = "#{feed.entries.count} articles"
+  = "#{feed[:articles].count} articles"
   %br
-  = "#{feed.entries.select{ |article| parse_for_image_source(article).present? }.count} articles that contain an image"
+  = "#{feed[:articles].select{ |article| article[:image].present? && article[:image][:url].present? }.count} articles that contain an image"
   %br
-  = "#{earliest_published_article(feed.entries)} is the earliest article"
+  = "#{earliest_published_article(feed[:articles])} is the earliest article"
   %br
-  = "#{latest_published_article(feed.entries)} is the latest article"
+  = "#{latest_published_article(feed[:articles])} is the latest article"

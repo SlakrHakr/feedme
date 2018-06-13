@@ -1,9 +1,9 @@
 %li.resource
-  - if parse_for_image_source(article).present?
-    = image_tag(parse_for_image_source(article), width: '100px')
+  - if article[:image].present? && article[:image][:url].present?
+    = image_tag(article[:image][:url], width: '100px')
     %br
-  = parse_for_published_date(article)
+  = article[:published_date]
   %br
-  %a{ href: parse_for_url(article) }= parse_for_name(article)
+  %a{ href: article[:url] }= article[:title]
   %br
-  = parse_for_description(article).html_safe
+  = article[:description].html_safe
