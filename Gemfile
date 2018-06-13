@@ -64,3 +64,4 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'feedjira', '~> 3.0.0.beta1'
 gem 'httparty', '~> 0.16'
 gem 'haml', '~> 5.0'
+gem 'devise', '~> 4.4'

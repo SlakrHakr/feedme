@@ -1,26 +1,31 @@
 class FeedsController < ApplicationController
   def index
-    @feeds = feeds.map { |feed|
-      xml = HTTParty.get(feed).body
+    @feeds = Feed.where(user: current_user).map { |feed|
+      xml = HTTParty.get(feed.url).body
       Feedjira.parse(xml)
     }
   end
 
   def show
-    xml = HTTParty.get(feeds.sample).body
+    sort_by = params['sort_by']
+
+    feed = Feed.find(params[:id].to_i)
+    xml = HTTParty.get(feed.url).body
     @feed = Feedjira.parse(xml)
 
     @articles = @feed.entries
   end
 
-  private
-    def feeds
-      [
-        'https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/significant_week.atom',
-        'http://www.feedforall.com/sample.xml',
-        'http://www.feedforall.com/blog-feed.xml',
-        'https://weblog.rubyonrails.org/feed/atom.xml',
-        'https://www.nasa.gov/rss/dyn/nasax_vodcast.rss'
-      ]
+  def new
+    @feed = Feed.new(user: current_user)
+  end
+
+  def create
+    feed = Feed.new(user: current_user, url: params[:feed][:url])
+    if feed.save
+      redirect_to feed_path(feed.id)
+    else
+      raise "Failed to add feed: #{params[:feed][:url]}"
     end
+  end
 end
