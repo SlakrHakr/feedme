@@ -1,4 +1,3 @@
-%a{ href: root_path } Home
 %h1= "Articles for #{@feed[:title]}"
 
 %a{ href: feed_path(@feed[:id], sort_by: { title: 'asc' }) } Sort by Title
