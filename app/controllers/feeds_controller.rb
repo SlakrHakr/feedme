@@ -17,6 +17,7 @@ class FeedsController < ApplicationController
     content = Feedjira.parse(xml)
 
     @feed = join_feed_content(feed, content)
+    @feed[:articles] = sort_articles(@feed[:articles], sort_by) if sort_by.present?
   end
 
   def new
@@ -52,5 +53,23 @@ class FeedsController < ApplicationController
       }
 
       feed.deep_symbolize_keys
+    end
+
+    def sort_articles(articles, sort_by)
+      if sort_by[:title].present?
+        sorted_articles = articles.sort_by{ |article| article[:title] }
+        sorted_articles.reverse! if sort_by[:title] == 'desc'
+        sorted_articles
+      elsif sort_by[:description].present?
+        sorted_articles = articles.sort_by{ |article| article[:description] }
+        sorted_articles.reverse! if sort_by[:description] == 'desc'
+        sorted_articles
+      elsif sort_by[:published_date].present?
+        sorted_articles = articles.sort_by{ |article| article[:published_date] }
+        sorted_articles.reverse! if sort_by[:published_date] == 'asc'
+        sorted_articles
+      else
+        articles
+      end
     end
 end
