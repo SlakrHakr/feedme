@@ -8,6 +8,6 @@
   %br
   = "#{feed[:articles].select{ |article| article[:image].present? && article[:image][:url].present? }.count} articles that contain an image"
   %br
-  = "#{earliest_published_article(feed[:articles])} is the earliest article"
+  = "First article published #{earliest_published_article(feed[:articles])[:published_date]}"
   %br
-  = "#{latest_published_article(feed[:articles])} is the latest article"
+  = "Latest article published #{latest_published_article(feed[:articles])[:published_date]}"

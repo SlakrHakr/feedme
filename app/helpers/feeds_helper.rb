@@ -42,10 +42,10 @@ module FeedsHelper
   end
 
   def latest_published_article(articles)
-    # TODO
+    articles.sort_by{ |article| article[:published_date] }.last
   end
 
   def earliest_published_article(articles)
-    # TODO
+    articles.sort_by{ |article| article[:published_date] }.first
   end
 end
