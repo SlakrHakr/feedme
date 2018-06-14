@@ -2,6 +2,18 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+body {
+  min-width: 300px;
+  max-width: 1000px;
+  margin: 0 auto;
+  -webkit-box-shadow: 4px 6px 38px 8px rgba(214,214,214,1);
+  -moz-box-shadow: 4px 6px 38px 8px rgba(214,214,214,1);
+  box-shadow: 4px 6px 38px 8px rgba(214,214,214,1);
+  padding: 20px;
+  min-height: 100vh;
+  font-family: arial;
+}
+
 ul {
   padding-left: 0px;
 }

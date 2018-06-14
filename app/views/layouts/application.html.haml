@@ -9,4 +9,6 @@
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
   %body
     = render partial: '/layouts/header'
+    %p.notice= notice
+    %p.alert= alert
     = yield
