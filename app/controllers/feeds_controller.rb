@@ -45,7 +45,7 @@ class FeedsController < ApplicationController
     else
       raise "Failed to add feed: #{params[:feed][:url]}"
     end
-  rescue URI::InvalidURIError, NoMethodError
+  rescue URI::InvalidURIError, NoMethodError, Errno::ECONNREFUSED
     flash[:new_feed_form_error] = 'URL doesn\'t seem to exist. Please try again.'
     redirect_to new_feed_path
   rescue Feedjira::NoParserAvailable
