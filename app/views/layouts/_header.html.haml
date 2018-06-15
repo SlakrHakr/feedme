@@ -5,4 +5,4 @@
     - if user_signed_in?
       = link_to('Logout', destroy_user_session_path, method: :delete, class: 'no-style')
       |
-      = current_user.email
+      = current_user.username

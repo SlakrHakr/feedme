@@ -90,11 +90,17 @@ i.large-and-in-charge {
   z-index: -1;
 }
 
-.error {
+.error, #error_explanation {
   background-color: $red;
   color: white;
   padding: 20px;
   border-radius: 5px;
   width: 93%;
   line-height: 20px;
+}
+
+.devise-links {
+  margin: auto;
+  width: 80%;
+  padding: 0px 10%;
 }

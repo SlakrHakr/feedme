@@ -15,7 +15,7 @@ class FeedsController < ApplicationController
   def show
     sort_by = params['sort_by']
 
-    feed = Feed.find(params[:id].to_i)
+    feed = Feed.where(id: params[:id].to_i, user: current_user).first
     xml = HTTParty.get(feed.url).body
     content = Feedjira.parse(xml)
 
@@ -33,6 +33,10 @@ class FeedsController < ApplicationController
   end
 
   def create
+    feeds = Feed.where(url: params[:feed][:url], user: current_user)
+    feed = feeds.present? ? feeds.first : nil
+    redirect_to feed_path(feed.id) and return if feed.present?
+
     feed = Feed.new(user: current_user, url: params[:feed][:url])
     xml = HTTParty.get(feed.url).body
     content = Feedjira.parse(xml)
