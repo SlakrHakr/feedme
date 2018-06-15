@@ -1,4 +1,8 @@
-%h1 Feeds
-%a{ href: new_feed_path } Add Feed
+.header
+  %h1.share-the-road Feeds
+  .actions
+    %a.text-blue.no-style{ href: new_feed_path }
+      = fa_icon 'plus', text: 'Add Feed'
+
 %ul#feeds
   = render partial: "feed", collection: @feeds

@@ -1,7 +1,66 @@
+$black: #292f33;
+$nice-light-gray: #F5F5F5;
+$deep-green: #379683;
+
+body {
+  background-color: $nice-light-gray;
+  margin: 0px;
+  color: $black;
+}
+
 .righty-tighty {
   float: right;
 }
 
 .lefty-loosey {
   float: left;
+}
+
+.hefty-text {
+  font-size: 2em;
+}
+
+a.no-style {
+  text-decoration: none;
+}
+
+.header {
+  padding: 10px;
+  background-color: lightgray;
+  margin: 0px;
+  background-color: $deep-green;
+  color: white;
+}
+
+.header .subheader, .header .subheader a {
+  color: $black;
+}
+
+.header .subheader .actions {
+  padding: 15px;
+}
+
+.header .actions {
+  float: right;
+  padding: 10px;
+}
+
+#article {
+  min-width: 300px;
+  max-width: 1000px;
+  margin: 0 auto;
+  -webkit-box-shadow: 4px 6px 38px 8px rgba(214,214,214,1);
+  -moz-box-shadow: 4px 6px 38px 8px rgba(214,214,214,1);
+  box-shadow: 4px 6px 38px 8px rgba(214,214,214,1);
+  min-height: 100vh;
+  font-family: arial;
+  background-color: white;
+}
+
+h1.share-the-road {
+  display: inline;
+}
+
+.underline {
+  text-decoration: underline;
 }

@@ -8,7 +8,12 @@
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
   %body
-    = render partial: '/layouts/header'
-    %p.notice= notice
-    %p.alert= alert
-    = yield
+    #article
+      = render partial: '/layouts/header'
+
+      - if notice.present?
+        %p.notice.info-banner= notice
+      - if alert.present?
+        %p.alert.info-banner= alert
+
+      = yield

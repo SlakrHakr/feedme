@@ -1,0 +1,25 @@
+$mint-green: #8ee4af;
+$deep-green: #379683;
+$black: #292f33;
+
+.info-banner {
+  padding: 20px;
+  position: fixed;
+  right: 0;
+  top: 20px;
+  z-index: 999;
+  border-top-left-radius: 6px;
+  border-bottom-left-radius: 6px;
+  border: 1px solid $deep-green;
+  border-right: 0px;
+}
+
+.alert {
+  background-color: $deep-green;
+  color: white;
+}
+
+.notice {
+  background-color: $mint-green;
+  color: $black;
+}

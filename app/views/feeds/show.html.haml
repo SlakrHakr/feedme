@@ -1,10 +1,14 @@
-%h1= "Articles for #{@feed[:title]}"
-
-%a{ href: feed_path(@feed[:id], sort_by: { title: 'asc' }) } Sort by Title
-%br
-%a{ href: feed_path(@feed[:id], sort_by: { description: 'asc' }) } Sort by Description
-%br
-%a{ href: feed_path(@feed[:id], sort_by: { published_date: 'desc' }) } Sort by Published Date
+.header
+  %h1.share-the-road
+    Articles for
+    %span.underline= @feed[:title]
+  .subheader
+    .actions
+      %a{ href: feed_path(@feed[:id], sort_by: { title: 'asc' }) } Title
+      |
+      %a{ href: feed_path(@feed[:id], sort_by: { description: 'asc' }) } Description
+      |
+      %a{ href: feed_path(@feed[:id], sort_by: { published_date: 'desc' }) } Published Date
 
 %ul#articles
   = render partial: "article", collection: @feed[:articles]

@@ -1,3 +1,8 @@
-%a{ href: root_path } Home
-%br
-= current_user.email
+#header
+  %a.no-style.hefty-text{ href: root_path }
+    = fa_icon 'rss', text: 'FEEDme', right: true
+  .actions
+    - if user_signed_in?
+      = link_to('Logout', destroy_user_session_path, method: :delete)
+      |
+      = current_user.email
