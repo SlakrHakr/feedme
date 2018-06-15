@@ -1,0 +1,14 @@
+-# feed
+-# sorted_by = { published_date: 'desc' }
+
+%a.no-style{ class: selected_class('title', sorted_by), |
+    href: feed_path(feed[:id], sort_by: { title: sort_order('title', sorted_by) }) }
+  = fa_icon 'sort', text: 'Title'
+|
+%a.no-style{ class: selected_class('description', sorted_by), |
+    href: feed_path(feed[:id], sort_by: { description: sort_order('description', sorted_by) }) }
+  = fa_icon 'sort', text: 'Description'
+|
+%a.no-style{ class: selected_class('published_date', sorted_by), |
+    href: feed_path(feed[:id], sort_by: { published_date: sort_order('published_date', sorted_by, 'desc') }) }
+  = fa_icon 'sort', text: 'Published Date'

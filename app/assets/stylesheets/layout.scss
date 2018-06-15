@@ -44,6 +44,15 @@ a.no-style {
 
 .subheader .actions {
   float: right;
+  color: lightgray;
+}
+
+.subheader .actions a {
+  color: lightgray;
+}
+
+.subheader .actions a.selected {
+  color: $black;
 }
 
 .header .actions {

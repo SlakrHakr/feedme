@@ -24,8 +24,8 @@ class FeedsController < ApplicationController
     # Some feeds have articles that are only a primary url for the feed for some reason...
     @feed[:articles].delete_if { |article| article[:title].blank? }
 
-    sort_by = sort_by.present? ? sort_by : { published_date: 'desc' }
-    @feed[:articles] = sort_articles(@feed[:articles], sort_by)
+    @sort_by = sort_by.present? ? sort_by : { published_date: 'desc' }
+    @feed[:articles] = sort_articles(@feed[:articles], @sort_by)
   end
 
   def new
