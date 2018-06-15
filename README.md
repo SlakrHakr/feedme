@@ -3,6 +3,6 @@
 ### How to start application
 ```
 bundle install
-rails db:migrate
+rake db:migrate RAILS_ENV=development
 rails s
 ```

@@ -3,4 +3,5 @@
     %a.resource-title.no-style{ href: article[:url] }= article[:title]
     .tags
       = present_datetime(article[:published_date])
-  .resource-description= article[:description].html_safe
+  - if article[:description].present?
+    .resource-description= article[:description].html_safe

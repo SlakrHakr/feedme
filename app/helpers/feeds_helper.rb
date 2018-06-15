@@ -31,6 +31,7 @@ module FeedsHelper
   def parse_for_description(resource)
     return resource.description if resource.respond_to?('description') && resource.description.present?
     return resource.summary if resource.respond_to?('summary') && resource.summary.present?
+    return resource.content if resource.respond_to?('content') && resource.content.present?
   end
 
   # Determine and return published date of an article.
