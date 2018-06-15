@@ -79,3 +79,12 @@ h1.share-the-road {
 .underline {
   text-decoration: underline;
 }
+
+i.large-and-in-charge {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  font-size: 25em;
+  color: lightgray;
+  z-index: -1;
+}

@@ -4,7 +4,7 @@ module FeedsHelper
   # @param resource [Feed/Article] Feed or article to extract title from
   # @return [String] Title of resource
   def parse_for_title(resource)
-    return resource.title if resource.title.present?
+    return resource.title if resource.respond_to?('title') && resource.title.present?
   end
 
   # Determine and return correct primary url for resource.
@@ -13,7 +13,7 @@ module FeedsHelper
   # @return [String] Primary url of resource
   def parse_for_url(resource)
     return resource.feed_url if resource.respond_to?('feed_url') && resource.feed_url.present?
-    return resource.url if resource.url.present?
+    return resource.url if resource.respond_to?('url') && resource.url.present?
   end
 
   # Determine and return correct image source for resource.
@@ -21,7 +21,7 @@ module FeedsHelper
   # @param resource [Feed/Article] Feed or article to extract image source from
   # @return [String] Url of image
   def parse_for_image_source(resource)
-    return resource.image.url if resource.respond_to?('image') && resource.image.respond_to?('url')
+    return resource.image.url if resource.respond_to?('image') && resource.image.respond_to?('url') && resource.image.url.present?
   end
 
   # Determine and return description for provided resource.
@@ -30,7 +30,7 @@ module FeedsHelper
   # @return [String] Description of resource
   def parse_for_description(resource)
     return resource.description if resource.respond_to?('description') && resource.description.present?
-    return resource.summary if resource.summary.present?
+    return resource.summary if resource.respond_to?('summary') && resource.summary.present?
   end
 
   # Determine and return published date of an article.
@@ -38,7 +38,7 @@ module FeedsHelper
   # @param article [Article] Article to extract published date from
   # @return [String] Date article was published
   def parse_for_published_date(article)
-    return article.published if article.published.present?
+    return article.published if article.respond_to?('published') && article.published.present?
   end
 
   # Return the latest published article for a list of articles.
