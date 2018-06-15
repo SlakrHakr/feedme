@@ -1,9 +1,7 @@
 %li.resource
-  - if article[:image].present? && article[:image][:url].present?
-    = image_tag(article[:image][:url], width: '100px')
-    %br
-  = article[:published_date]
-  %br
-  %a{ href: article[:url] }= article[:title]
-  %br
-  = article[:description].html_safe
+  .item
+    %a{ href: article[:url] }= article[:title]
+    .tags
+      = article[:published_date]
+  %p
+    = article[:description].html_safe

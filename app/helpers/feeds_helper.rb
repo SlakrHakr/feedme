@@ -41,10 +41,18 @@ module FeedsHelper
     return article.published if article.published.present?
   end
 
+  # Return the latest published article for a list of articles.
+  #
+  # @param articles [Array] List of articles
+  # @return [Hash] Latest published article
   def latest_published_article(articles)
     articles.sort_by{ |article| article[:published_date] }.last
   end
 
+  # Return the earliest published article for a list of articles.
+  #
+  # @param articles [Array] List of articles
+  # @return [Hash] Latest published article
   def earliest_published_article(articles)
     articles.sort_by{ |article| article[:published_date] }.first
   end

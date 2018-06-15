@@ -52,8 +52,6 @@ class FeedsController < ApplicationController
         article = {}
         article[:title] = helpers.parse_for_title(entry)
         article[:url] = helpers.parse_for_url(entry)
-        article[:image] = {}
-        article[:image][:url] = helpers.parse_for_image_source(entry)
         article[:published_date] = helpers.parse_for_published_date(entry)
         article[:description] = helpers.parse_for_description(entry)
 
