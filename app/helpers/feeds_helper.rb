@@ -57,6 +57,13 @@ module FeedsHelper
     articles.sort_by{ |article| article[:published_date] }.first
   end
 
+  # Determine if an article contains an image or not.
+  #
+  # @return [Hash] Article to search
+  def article_contains_image?(article)
+    /.*<img .*>.*/ === article[:description]
+  end
+
   # Determine if sort item is currently selected.
   #
   # @return [Boolean] True if item is currently selected, false if not

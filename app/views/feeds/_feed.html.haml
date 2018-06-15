@@ -10,7 +10,7 @@
     %br
     = "#{feed[:articles].count} articles"
     %br
-    = "#{feed[:articles].select{ |article| article[:image].present? && article[:image][:url].present? }.count} articles that contain an image"
+    = "#{feed[:articles].select{ |article| article_contains_image?(article) }.count} articles that contain an image"
     %br
     = "First article published #{earliest_published_article(feed[:articles])[:published_date]}"
     %br
