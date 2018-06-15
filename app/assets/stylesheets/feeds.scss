@@ -10,16 +10,51 @@ ul {
 
 li.resource {
   list-style: none;
-  border-top: 1px solid gray;
-  border-bottom: 1px solid gray;
+  border-bottom: 1px solid lightgray;
   padding: 30px;
-  margin-bottom: 10px;
+}
+
+li.resource .content {
+  padding-left: 15px;
 }
 
 #feeds, #articles {
-  padding: 20px;
+  margin: 0px;
 }
 
 .text-blue {
   color: $blue;
+}
+
+.no-image {
+  width: 100px;
+}
+
+.tall {
+  min-height: 100px;
+  line-height: 100px;
+}
+
+.clear {
+  clear: both;
+}
+
+.rounded-corners {
+  border-radius: 5px;
+}
+
+.resource-image {
+  width: 100px;
+}
+
+@media only screen and (max-width: 560px) {
+    .tall {
+        min-height: 0px;
+        line-height: 0px;
+    }
+
+    .resource-image {
+      width: 100%;
+      margin: 15px;
+    }
 }

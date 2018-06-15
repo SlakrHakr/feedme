@@ -2,13 +2,15 @@
   %h1.share-the-road
     Articles for
     %span.underline= @feed[:title]
-  .subheader
-    .actions
-      %a{ href: feed_path(@feed[:id], sort_by: { title: 'asc' }) } Title
-      |
-      %a{ href: feed_path(@feed[:id], sort_by: { description: 'asc' }) } Description
-      |
-      %a{ href: feed_path(@feed[:id], sort_by: { published_date: 'desc' }) } Published Date
+.subheader
+  %a.no-style{ href: feeds_path }
+    = fa_icon 'chevron-left', text: 'Back to Feeds'
+  .actions
+    %a{ href: feed_path(@feed[:id], sort_by: { title: 'asc' }) } Title
+    |
+    %a{ href: feed_path(@feed[:id], sort_by: { description: 'asc' }) } Description
+    |
+    %a{ href: feed_path(@feed[:id], sort_by: { published_date: 'desc' }) } Published Date
 
 %ul#articles
   = render partial: "article", collection: @feed[:articles]

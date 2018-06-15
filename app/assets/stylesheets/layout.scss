@@ -32,12 +32,18 @@ a.no-style {
   color: white;
 }
 
-.header .subheader, .header .subheader a {
+.subheader, .subheader a {
   color: $black;
 }
 
-.header .subheader .actions {
-  padding: 15px;
+.subheader {
+  border-bottom: 1px solid lightgray;
+  padding: 10px;
+  height: 15px;
+}
+
+.subheader .actions {
+  float: right;
 }
 
 .header .actions {

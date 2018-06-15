@@ -1,13 +1,19 @@
 %li.resource
-  - if feed[:image].present? && feed[:image][:url].present?
-    = image_tag(feed[:image][:url], width: '100px')
+  .lefty-loosey.tall
+    - if feed[:image].present? && feed[:image][:url].present?
+      = image_tag(feed[:image][:url], class: 'rounded-corners resource-image')
+    - else
+      .no-image
+
+  .lefty-loosey.content
+    %a{ href: feed_path(feed[:id]) }= feed[:title]
     %br
-  %a{ href: feed_path(feed[:id]) }= feed[:title]
-  %br
-  = "#{feed[:articles].count} articles"
-  %br
-  = "#{feed[:articles].select{ |article| article[:image].present? && article[:image][:url].present? }.count} articles that contain an image"
-  %br
-  = "First article published #{earliest_published_article(feed[:articles])[:published_date]}"
-  %br
-  = "Latest article published #{latest_published_article(feed[:articles])[:published_date]}"
+    = "#{feed[:articles].count} articles"
+    %br
+    = "#{feed[:articles].select{ |article| article[:image].present? && article[:image][:url].present? }.count} articles that contain an image"
+    %br
+    = "First article published #{earliest_published_article(feed[:articles])[:published_date]}"
+    %br
+    = "Latest article published #{latest_published_article(feed[:articles])[:published_date]}"
+
+  .clear
