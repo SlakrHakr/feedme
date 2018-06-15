@@ -3,6 +3,6 @@
     = fa_icon 'rss', text: 'FEEDme', right: true
   .actions
     - if user_signed_in?
-      = link_to('Logout', destroy_user_session_path, method: :delete)
+      = link_to('Logout', destroy_user_session_path, method: :delete, class: 'no-style')
       |
       = current_user.email
