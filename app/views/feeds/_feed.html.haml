@@ -1,19 +1,24 @@
 %li.resource
-  .lefty-loosey.tall
+  .righty-tighty.tall
     - if feed[:image].present? && feed[:image][:url].present?
       = image_tag(feed[:image][:url], class: 'rounded-corners resource-image')
     - else
       .no-image
 
-  .lefty-loosey.content
-    %a{ href: feed_path(feed[:id]) }= feed[:title]
+  .righty-tighty.content
+    %a.resource-title.no-style{ href: feed_path(feed[:id]) }= feed[:title]
     %br
-    = "#{feed[:articles].count} articles"
-    %br
-    = "#{feed[:articles].select{ |article| article_contains_image?(article) }.count} articles that contain an image"
-    %br
-    = "First article published #{present_datetime(earliest_published_article(feed[:articles])[:published_date])}"
-    %br
-    = "Latest article published #{present_datetime(latest_published_article(feed[:articles])[:published_date])}"
+    .resource-description
+      %span.bold= feed[:articles].count
+      %span.metadata= feed[:articles].count == 1 ? 'article' : 'articles'
+      %br
+      %span.bold= feed[:articles].select{ |article| article_contains_image?(article) }.count
+      %span.metadata= feed[:articles].count == 1 ? 'article that contains an image' : 'articles that contain an image'
+      %br
+      %span.metadata Earliest article was published
+      %span.bold= present_datetime(earliest_published_article(feed[:articles])[:published_date])
+      %br
+      %span.metadata Latest article was published
+      %span.bold= present_datetime(latest_published_article(feed[:articles])[:published_date])
 
   .clear

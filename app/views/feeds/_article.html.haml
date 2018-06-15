@@ -1,7 +1,6 @@
 %li.resource
   .item
-    %a{ href: article[:url] }= article[:title]
+    %a.resource-title.no-style{ href: article[:url] }= article[:title]
     .tags
       = present_datetime(article[:published_date])
-  %p
-    = article[:description].html_safe
+  .resource-description= article[:description].html_safe
