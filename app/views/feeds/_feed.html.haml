@@ -12,8 +12,8 @@
     %br
     = "#{feed[:articles].select{ |article| article_contains_image?(article) }.count} articles that contain an image"
     %br
-    = "First article published #{earliest_published_article(feed[:articles])[:published_date]}"
+    = "First article published #{present_datetime(earliest_published_article(feed[:articles])[:published_date])}"
     %br
-    = "Latest article published #{latest_published_article(feed[:articles])[:published_date]}"
+    = "Latest article published #{present_datetime(latest_published_article(feed[:articles])[:published_date])}"
 
   .clear

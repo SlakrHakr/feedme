@@ -2,6 +2,6 @@
   .item
     %a{ href: article[:url] }= article[:title]
     .tags
-      = article[:published_date]
+      = present_datetime(article[:published_date])
   %p
     = article[:description].html_safe
