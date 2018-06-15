@@ -1,6 +1,7 @@
 $black: #292f33;
 $nice-light-gray: #F5F5F5;
 $deep-green: #379683;
+$red: #cc0000;
 
 body {
   background-color: $nice-light-gray;
@@ -87,4 +88,13 @@ i.large-and-in-charge {
   font-size: 25em;
   color: lightgray;
   z-index: -1;
+}
+
+.error {
+  background-color: $red;
+  color: white;
+  padding: 20px;
+  border-radius: 5px;
+  width: 93%;
+  line-height: 20px;
 }

@@ -1,0 +1,49 @@
+$blue: #05386b;
+$deep-green: #379683;
+
+form {
+  margin: auto;
+  width: 80%;
+  padding: 10%;
+}
+
+form label {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+form input[type="text"] {
+  border: 0px;
+  border-bottom: 2px solid $deep-green;
+  width: 95%;
+  padding: 10px;
+  font-size: 20px;
+  outline-width: 0;
+}
+
+form input[type="submit"] {
+  background-color: $deep-green;
+  color: white;
+  padding: 20px;
+  border-radius: 5px;
+  font-size: 13px;
+  cursor: pointer;
+  float: right;
+  margin: 20px;
+}
+
+.empty-content {
+  margin: auto;
+  font-size: 20px;
+  color: darkslategray;
+  background-color: lightgray;
+  padding: 40px;
+  text-align: center;
+  margin: 5%;
+  text-align: center;
+  border-radius: 5px;
+}
+
+.empty-content a {
+  color: darkslategray;
+}

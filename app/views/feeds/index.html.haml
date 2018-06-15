@@ -5,4 +5,10 @@
       = fa_icon 'plus', text: 'Add Feed'
 
 %ul#feeds
-  = render partial: "feed", collection: @feeds
+  - if @feeds.count <= 0
+    .empty-content
+      No feeds found for your account.
+      %a{ href: new_feed_path } Add
+      one and FEED yourself!
+  - else
+    = render partial: "feed", collection: @feeds

@@ -1,5 +1,14 @@
 = form_for @feed do |f|
-  = f.label :url
-  = f.text_field :url
+  - if flash[:new_feed_form_error].present?
+    .error
+      = fa_icon 'exclamation-triangle'
+      = flash[:new_feed_form_error]
+    %br
+
+  = f.label :url, 'URL'
   %br
-  = f.submit
+  %span.metadata Uniform Resource Locator
+  %br
+  = f.text_field :url, autofocus: true, required: true
+  %br
+  = f.submit 'Add Feed'

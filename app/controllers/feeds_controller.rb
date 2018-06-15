@@ -34,11 +34,19 @@ class FeedsController < ApplicationController
 
   def create
     feed = Feed.new(user: current_user, url: params[:feed][:url])
+    xml = HTTParty.get(feed.url).body
+    content = Feedjira.parse(xml)
     if feed.save
       redirect_to feed_path(feed.id)
     else
       raise "Failed to add feed: #{params[:feed][:url]}"
     end
+  rescue URI::InvalidURIError
+    flash[:new_feed_form_error] = 'URL doesn\'t seem to exist. Please try again.'
+    redirect_to new_feed_path
+  rescue Feedjira::NoParserAvailable
+    flash[:new_feed_form_error] = 'URL doesn\'t seem to be an RSS feed. Please try again.'
+    redirect_to new_feed_path
   end
 
   private
