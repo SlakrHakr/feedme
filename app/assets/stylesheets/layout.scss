@@ -1,7 +1,4 @@
-$black: #292f33;
-$nice-light-gray: #F5F5F5;
-$deep-green: #379683;
-$red: #cc0000;
+@import "palette";
 
 body {
   background-color: $nice-light-gray;
