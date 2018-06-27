@@ -83,7 +83,7 @@ class FeedsController < ApplicationController
         sorted_articles.reverse! if sort_by[:description] == 'desc'
         sorted_articles
       elsif sort_by[:published_date].present?
-        sorted_articles = articles.sort_by{ |article| article[:published_date] }
+        sorted_articles = articles.sort { |a,b| a[:published_date] && b[:published_date] ? a[:published_date] <=> b[:published_date] : a[:published_date] ? -1 : 1 }
         sorted_articles.reverse! if sort_by[:published_date] == 'desc'
         sorted_articles
       else

@@ -47,7 +47,9 @@ module FeedsHelper
   # @param articles [Array] List of articles
   # @return [Hash] Latest published article
   def latest_published_article(articles)
-    articles.sort_by{ |article| article[:published_date] }.last
+    articles_temp_store = articles.dup
+    articles_temp_store.delete_if { |article| article[:published_date].blank? }
+    articles_temp_store.sort_by{ |article| article[:published_date] }.last
   end
 
   # Return the earliest published article for a list of articles.
@@ -55,7 +57,9 @@ module FeedsHelper
   # @param articles [Array] List of articles
   # @return [Hash] Latest published article
   def earliest_published_article(articles)
-    articles.sort_by{ |article| article[:published_date] }.first
+    articles_temp_store = articles.dup
+    articles_temp_store.delete_if { |article| article[:published_date].blank? }
+    articles_temp_store.sort_by{ |article| article[:published_date] }.first
   end
 
   # Determine if an article contains an image or not.
