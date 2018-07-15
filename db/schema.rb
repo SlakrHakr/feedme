@@ -10,14 +10,45 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_06_15_155040) do
+ActiveRecord::Schema.define(version: 2018_07_15_184748) do
 
-  create_table "feeds", force: :cascade do |t|
-    t.integer "user_id"
-    t.string "url"
+  create_table "articles", force: :cascade do |t|
+    t.integer "feed_id"
+    t.string "title", null: false
+    t.string "url", null: false
+    t.datetime "published_date"
+    t.string "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_feeds_on_user_id"
+    t.index ["feed_id"], name: "index_articles_on_feed_id"
+  end
+
+  create_table "feeds", force: :cascade do |t|
+    t.string "url", null: false
+    t.string "title", null: false
+    t.string "image"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "feeds_users", id: false, force: :cascade do |t|
+    t.integer "feed_id"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["feed_id"], name: "index_feeds_users_on_feed_id"
+    t.index ["user_id"], name: "index_feeds_users_on_user_id"
+  end
+
+  create_table "properties", force: :cascade do |t|
+    t.integer "article_id"
+    t.integer "user_id"
+    t.string "key", null: false
+    t.string "value", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["article_id"], name: "index_properties_on_article_id"
+    t.index ["user_id"], name: "index_properties_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|

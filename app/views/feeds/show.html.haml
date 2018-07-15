@@ -10,4 +10,4 @@
   .clear
 
 %ul#articles
-  = render partial: "article", collection: @feed[:articles]
+  = render partial: "article", collection: @feed.articles.order("#{@sort_by.flatten[0]} #{@sort_by.flatten[1].upcase}")

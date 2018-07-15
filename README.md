@@ -1,8 +1,9 @@
 # FEEDme
 
-### How to start application
+### Development
+
 ```
-bundle install
-rake db:migrate RAILS_ENV=development
+bundle install --without production
+rake db:migrate
 rails s
 ```

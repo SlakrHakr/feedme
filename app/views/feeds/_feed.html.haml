@@ -1,28 +1,28 @@
 %li.resource
   .righty-tighty.tall
-    - if feed[:image].present? && feed[:image][:url].present?
-      = image_tag(feed[:image][:url], class: 'rounded-corners resource-image')
+    - if feed.image.present?
+      = image_tag(feed.image, class: 'rounded-corners resource-image')
     - else
       .no-image
 
   .righty-tighty.content
-    %a.resource-title.no-style{ href: feed_path(feed[:id]) }= feed[:title]
+    %a.resource-title.no-style{ href: feed_path(feed.id) }= feed.title
     %br
     .resource-description
-      %span.bold= feed[:articles].count
-      %span.metadata= feed[:articles].count == 1 ? 'article' : 'articles'
+      %span.bold= feed.articles.count
+      %span.metadata= feed.articles.count == 1 ? 'article' : 'articles'
       %br
-      %span.bold= feed[:articles].select{ |article| article_contains_image?(article) }.count
-      %span.metadata= feed[:articles].count == 1 ? 'article that contains an image' : 'articles that contain an image'
+      %span.bold= feed.articles.select{ |article| article_contains_image?(article) }.count
+      %span.metadata= feed.articles.count == 1 ? 'article that contains an image' : 'articles that contain an image'
       %br
-      - earliest_published_article = earliest_published_article(feed[:articles])
-      - if earliest_published_article.present? && earliest_published_article[:published_date].present?
+      - earliest_published_article = earliest_published_article(feed.articles)
+      - if earliest_published_article.present? && earliest_published_article.published_date.present?
         %span.metadata Earliest article was published
-        %span.bold= present_datetime(earliest_published_article[:published_date])
+        %span.bold= present_datetime(earliest_published_article.published_date)
         %br
-      - latest_published_article = latest_published_article(feed[:articles])
-      - if latest_published_article.present? && latest_published_article[:published_date].present?
+      - latest_published_article = latest_published_article(feed.articles)
+      - if latest_published_article.present? && latest_published_article.published_date.present?
         %span.metadata Latest article was published
-        %span.bold= present_datetime(latest_published_article[:published_date])
+        %span.bold= present_datetime(latest_published_article.published_date)
 
   .clear
