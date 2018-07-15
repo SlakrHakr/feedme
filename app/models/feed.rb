@@ -5,9 +5,24 @@ class Feed < ApplicationRecord
   # Update local store with any changes to feed / new articles.
   #
   # @return [boolean] true if success, false if failure
-  def update_cache
-    # TODO: update information in database if feed content changed
-    # Requires recurring job as part of https://github.com/SlakrHakr/feedme/issues/1
+  def update_local_storage
+    xml = HTTParty.get(self.url).body
+    content = Feedjira.parse(xml)
+
+    self.title = Feed.parse_for_title(content)
+    self.image = Feed.parse_for_image_source(content)
+    self.articles += Feed.convert_articles(content.entries).select do |article|
+      is_new = true
+      self.articles.each do |existing_article|
+        if (existing_article.title == article.title && existing_article.published_date == article.published_date)
+          is_new = false
+          break
+        end
+      end
+      is_new
+    end
+
+    self.save
   end
 
   # Retrieve current content for feed if not already stored in our system.
@@ -32,19 +47,23 @@ class Feed < ApplicationRecord
     feed.users = [user] if user.present?
     feed.title = parse_for_title(content)
     feed.image = parse_for_image_source(content)
-    feed.articles = content.entries.map { |entry|
-      article = Article.new(title: parse_for_title(entry))
-      article.url = parse_for_url(entry)
-      article.published_date = parse_for_published_date(entry)
-      article.description = parse_for_description(entry)
-
-      article
-    }
+    feed.articles = convert_articles(content.entries)
 
     feed
   end
 
   private
+    def self.convert_articles(entries)
+      entries.map do |entry|
+        article = Article.new(title: parse_for_title(entry))
+        article.url = parse_for_url(entry)
+        article.published_date = parse_for_published_date(entry)
+        article.description = parse_for_description(entry)
+
+        article
+      end
+    end
+
     # Determine and return title for resource.
     #
     # @param resource [Feed/Article] Feed or article to extract title from

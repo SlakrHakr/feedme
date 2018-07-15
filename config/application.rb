@@ -17,5 +17,17 @@ module Feedme
     # the framework and any gems in your application.
 
     config.action_dispatch.rescue_responses["ActiveRecord::RecordNotFound"] = :not_found
+
+    # Sync all existing feeds with remote content
+    if defined?(Rails::Server)
+      config.after_initialize do
+        Thread.new {
+          while true
+            FeedSyncJob.perform_now
+            sleep 1.hour
+          end
+        }
+      end
+    end
   end
 end
