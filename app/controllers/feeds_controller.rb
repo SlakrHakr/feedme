@@ -4,12 +4,17 @@ class FeedsController < ApplicationController
   end
 
   def show
-    sort_by = params['sort_by']
-    sort_order = params['sort_order']
-    @sort_by = (sort_by.present? && sort_order.present?) ? { sort_by.to_sym => sort_order } : { published_date: 'desc' }
+    sort_by = params['sort_by'].present? ? params['sort_by'] : 'published_date'
+    sort_order = params['sort_order'].present? ? params['sort_order'] : 'desc'
+    @sort_by = { sort_by.to_sym => sort_order }
+
+    include_read = params['include_read'].present? ? ActiveModel::Type::Boolean.new.cast(params['include_read']) : false
 
     @feed = current_user.feeds.detect{ |feed| feed.id == params[:id].to_i }
     raise ActiveRecord::RecordNotFound unless @feed.present?
+
+    @articles = @feed.articles.order("#{sort_by} #{sort_order.upcase}")
+    @articles = @articles.select { |article| not article.read? } unless include_read
   end
 
   def new
@@ -17,7 +22,7 @@ class FeedsController < ApplicationController
   end
 
   def create
-    feed = Feed.build_from_url(params[:feed][:url], current_user)
+    feed = Feed.build_from_url(params[:feed][:url])
     if feed.save
       redirect_to feed_path(feed.id)
     else

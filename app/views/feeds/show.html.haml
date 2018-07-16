@@ -10,4 +10,10 @@
   .clear
 
 %ul#articles
-  = render partial: "article", collection: @feed.articles.order("#{@sort_by.flatten[0]} #{@sort_by.flatten[1].upcase}")
+  - if @articles.present?
+    = render partial: "article", collection: @articles
+  - else
+    %p
+      %center
+        %h3
+          You're all caught up! Have a pleasant day!

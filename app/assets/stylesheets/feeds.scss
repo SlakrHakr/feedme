@@ -65,11 +65,15 @@ li.resource .content {
 }
 
 .metadata {
-  color: gray;
+  color: $gray;
 }
 
 .bold {
   font-weight: bold;
+}
+
+.gray {
+  color: $gray;
 }
 
 @media only screen and (max-width: 560px) {

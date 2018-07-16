@@ -29,14 +29,11 @@ class Feed < ApplicationRecord
   # Returns existing Feed if already known to our system.
   #
   # @param url [string] Feed url to retrieve content for
-  # @param user [User] default: nil, User to associate feed with
   # @return [Feed] An instance of our Feed structure
-  def self.build_from_url(url, user = nil)
+  def self.build_from_url(url)
     feed = Feed.find_by url: url
     if feed.present?
-      if user.present?
-        feed.users.push(user) unless feed.users.include?(user)
-      end
+      feed.users.push(User.current) unless feed.users.include?(User.current)
       return feed
     end
 
@@ -44,7 +41,7 @@ class Feed < ApplicationRecord
     content = Feedjira.parse(xml)
 
     feed = Feed.new(url: url)
-    feed.users = [user] if user.present?
+    feed.users = [User.current]
     feed.title = parse_for_title(content)
     feed.image = parse_for_image_source(content)
     feed.articles = convert_articles(content.entries)

@@ -6,3 +6,13 @@
   - if article.description.present?
     .resource-description= article.description.html_safe
     .clear
+
+  %p.righty-tighty
+    - if article.read?
+      %i.fa.fa-circle
+      = link_to 'Mark Unread', feed_article_path(feed_id: @feed.id, id: article.id, read: false), method: :put, class: 'gray no-style'
+    - else
+      %i.fa.fa-circle-o
+      = link_to 'Mark Read', feed_article_path(feed_id: @feed.id, id: article.id, read: true), method: :put, class: 'gray no-style'
+
+  .clear
