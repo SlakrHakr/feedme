@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_user!
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :set_current_user
-  # rescue_from StandardError, :with => :render_error
+  rescue_from StandardError, :with => :render_error
 
   def set_current_user
     User.current = current_user
